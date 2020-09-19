@@ -7,35 +7,27 @@ using UnityEngine.SceneManagement;
 public class PauseMenuScript : MonoBehaviour
 {
     public GameObject PauseMenu;
-    public GameObject OptionsMenu;
-    public Button Pause_Button;
+    public Button pause_button;
 
     // Start is called before the first frame update
     void Start()
     {
         PauseMenu.SetActive(false);
-        OptionsMenu.SetActive(false);
     }
 
     public void PauseButton()
     {
         PauseMenu.SetActive(true);
-        OptionsMenu.SetActive(false);
+        pause_button.interactable = false;
         // TODO: somehow pause actual game
     }
 
     public void ResumeButton()
     {
         PauseMenu.SetActive(false);
+        pause_button.interactable = true;
         // TODO: reverse of above 
     }
-
-    public void OptionsButton()
-    {
-        PauseMenu.SetActive(false);
-        OptionsMenu.SetActive(true);
-    }
-
 
     public void QuitButton()
     {
