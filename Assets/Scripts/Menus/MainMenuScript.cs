@@ -1,32 +1,47 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
-public class MainMenuCanvas : MonoBehaviour
+public class MainMenuScript : MonoBehaviour
 {
     public GameObject MainMenu;
     public GameObject CreditsMenu;
     public GameObject MainMenuBackground;
 
-    public bool toggle;
+    //public bool toggle_mainMenu;
 
     // Start is called before the first frame update
     void Start()
     {
-        if (!toggle) {
+        if (SceneManager.sceneCount > 1)
+        {
+            SceneManager.UnloadSceneAsync("SampleScene");
+        }
+        MainMenuButton();
+        
+        /*
+        if (!toggle_mainMenu) {
             MainMenu.SetActive(false);
             CreditsMenu.SetActive(false);
             MainMenuBackground.SetActive(false);
-
         } else {
+            SceneManager.UnloadSceneAsync("SampleScene");
             MainMenuButton();
-        }
+        } */
+    }
+
+    IEnumerator SwitchToPlay()
+    {
+        AsyncOperation load = SceneManager.LoadSceneAsync("SampleScene", LoadSceneMode.Single);
+        yield return load;
+        SceneManager.UnloadSceneAsync("MainMenu");
     }
 
     public void PlayNowButton()
     {
         // switch to game scene
-        UnityEngine.SceneManagement.SceneManager.LoadScene("SampleScene");
+        StartCoroutine(SwitchToPlay());
     }
 
     public void CreditsButton()
