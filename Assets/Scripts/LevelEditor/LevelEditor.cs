@@ -16,6 +16,7 @@ public class LevelEditor : MonoBehaviour
         audioSource = GetComponent<AudioSource>();
         audioSource.clip = beatMap.Song;
         PlayMusic();
+        beatMap.LoadBeatMap();
     }
 
     // Update is called once per frame
@@ -30,19 +31,43 @@ public class LevelEditor : MonoBehaviour
             }
         }
 
-        if(Input.GetKeyDown(KeyCode.Space))
+        bool topPressed = false;
+        bool botPressed = false;
+        
+        if(Input.GetKeyDown(GameConstants.topButton1) || Input.GetKeyDown(GameConstants.topButton2))
         {
-            ArrayList note = new ArrayList();
-            note.Add(audioSource.time);
-            note.Add(1);
+            topPressed = true;
+        }
+        
+        if(Input.GetKeyDown(GameConstants.botButton1) || Input.GetKeyDown(GameConstants.botButton2))
+        {
+            botPressed = true;
+        }
+
+
+        if(topPressed || botPressed)
+        {
+            NoteData note = new NoteData();
+            note.time = audioSource.time;
+            note.topNote = topPressed;
+            note.botNote = botPressed;
             beatMap.AddBeat(note);
         }
+
+        if(Input.GetKeyDown(KeyCode.Q))
+        {
+            beatMap.SaveBeatMap();
+        }
     }
+
 
     private void PlayMusic()
     {
         paused = false;
-        audioSource.Play();
+        
+        //TODO commentated out for sanity
+
+        //audioSource.Play();
     }
 
     private void PauseMusic() 
@@ -50,4 +75,5 @@ public class LevelEditor : MonoBehaviour
         paused = true;
         audioSource.Pause();
     }
+
 }
