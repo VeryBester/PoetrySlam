@@ -20,6 +20,7 @@ public class PauseMenuScript : MonoBehaviour
         PauseMenu.SetActive(true);
         pause_button.interactable = false;
         // TODO: somehow pause actual game
+        
     }
 
     public void ResumeButton()

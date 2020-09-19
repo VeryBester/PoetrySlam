@@ -10,13 +10,11 @@ public class NoteBar : MonoBehaviour
         switch (other.tag)
         {
             case "Early":
-                other.GetComponentInParent<Note>().scoreAccMult = 0.5f;
+            case "Late":
+                other.GetComponentInParent<Note>().scoreAccMult = GameConstants.earlyLateMult;
                 break;
             case "Perfect":
-                other.GetComponentInParent<Note>().scoreAccMult = 1f;
-                break;
-            case "Late":
-                other.GetComponentInParent<Note>().scoreAccMult = 0.5f;
+                other.GetComponentInParent<Note>().scoreAccMult = GameConstants.perfectMult;
                 break;
         }
     }
@@ -26,8 +24,6 @@ public class NoteBar : MonoBehaviour
         if (other.tag.Equals("Late"))
         {
             other.GetComponentInParent<Note>().canHit = false;
-            // other.gameObject.GetComponent<Note>().scoreKeeper.UpdateScore(0);
-            Destroy(other.GetComponentInParent<Note>().gameObject);
         }
     }
 }

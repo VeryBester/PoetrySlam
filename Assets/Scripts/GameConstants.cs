@@ -9,4 +9,9 @@ public class GameConstants
 
     public static KeyCode topButton1 = KeyCode.J;
     public static KeyCode topButton2 = KeyCode.K;
+    // Point gain on perfect hit
+    public static int maxPointGain = 100;
+    // Multipliers for point gain on early/late and perfect hit
+    public static float earlyLateMult = 0.5f;
+    public static float perfectMult = 1f;
 }

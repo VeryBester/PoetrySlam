@@ -50,7 +50,7 @@ public class Note : MonoBehaviour
             if (canHit)
             {
                 audioSource.Play();
-                scoreKeeper.UpdateScore((int) (scoreAccMult * 100));
+                scoreKeeper.UpdateScore((int) (scoreAccMult * GameConstants.maxPointGain));
                 Destroy(gameObject);
             }
             else
@@ -68,7 +68,7 @@ public class Note : MonoBehaviour
             if (canHit)
             {
                 audioSource.Play();
-                scoreKeeper.UpdateScore((int) (scoreAccMult * 100));
+                scoreKeeper.UpdateScore((int) (scoreAccMult * GameConstants.maxPointGain));
                 Destroy(gameObject);
             }
             else
@@ -82,10 +82,5 @@ public class Note : MonoBehaviour
     {
         // Can adjust speed using bpm value
         rb.velocity = bpm * Vector2.left;
-    }
-
-    private void OnBecameInvisible()
-    {
-        Destroy(gameObject);
     }
 }
