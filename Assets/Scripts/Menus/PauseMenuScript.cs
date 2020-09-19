@@ -15,6 +15,14 @@ public class PauseMenuScript : MonoBehaviour
         PauseMenu.SetActive(false);
     }
 
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            PauseButton();
+        }
+    }
+
     public void PauseButton()
     {
         PauseMenu.SetActive(true);
@@ -34,6 +42,7 @@ public class PauseMenuScript : MonoBehaviour
     public void QuitButton()
     {
         // switch to game scene
+        Time.timeScale = 1;
         StartCoroutine(SwitchToMain());
     }
 
