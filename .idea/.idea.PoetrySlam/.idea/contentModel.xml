@@ -6,14 +6,23 @@
     <e p="E:\Unity Projects\PoetrySlam\PoetrySlam" t="IncludeRecursive">
       <e p="Assembly-CSharp.csproj" t="IncludeRecursive" />
       <e p="Assets" t="Include">
+        <e p="BeatMaps" t="Include">
+          <e p="Json" t="Include">
+            <e p="test.txt" t="Include" />
+          </e>
+        </e>
         <e p="Classes" t="Include">
           <e p="Score.cs" t="Include" />
         </e>
         <e p="Scripts" t="Include">
+          <e p="BackgroundMove.cs" t="Include" />
+          <e p="BackgroundScroll.cs" t="Include" />
           <e p="GameConstants.cs" t="Include" />
+          <e p="JsonHelper.cs" t="Include" />
           <e p="LevelEditor" t="Include">
             <e p="BeatMap.cs" t="Include" />
             <e p="LevelEditor.cs" t="Include" />
+            <e p="NoteData.cs" t="Include" />
           </e>
           <e p="Menus" t="Include">
             <e p="MainMenuScript.cs" t="Include" />

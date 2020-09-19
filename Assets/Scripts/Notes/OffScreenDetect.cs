@@ -5,15 +5,12 @@ using UnityEngine;
 
 public class OffScreenDetect : MonoBehaviour
 {
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.tag.Equals("Early"))
+        if (other.GetComponentInParent<Note>() != null)
         {
-            if (other.GetComponentInParent<Note>() != null)
-            {
-                other.GetComponentInParent<Note>().scoreKeeper.UpdateScore(0);
-                Destroy(other.GetComponentInParent<Note>().gameObject);
-            }
+            other.GetComponentInParent<Note>().scoreKeeper.UpdateScore(0);
+            Destroy(other.GetComponentInParent<Note>().gameObject);
         }
     }
 }
