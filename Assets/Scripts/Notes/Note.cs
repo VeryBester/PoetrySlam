@@ -44,7 +44,7 @@ public class Note : MonoBehaviour
 
     private void DoTopInput()
     {
-        if (Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.F))
+        if (Input.GetKeyDown(GameConstants.topButton1) || Input.GetKeyDown(GameConstants.topButton2))
         {
             // Need to check how close to correct it is for scoring
             if (canHit)
@@ -62,7 +62,7 @@ public class Note : MonoBehaviour
 
     private void DoLowerInput()
     {
-        if (Input.GetKeyDown(KeyCode.J) || Input.GetKeyDown(KeyCode.K))
+        if (Input.GetKeyDown(GameConstants.botButton1) || Input.GetKeyDown(GameConstants.botButton2))
         {
             // Need to check how close to correct it is for scoring
             if (canHit)

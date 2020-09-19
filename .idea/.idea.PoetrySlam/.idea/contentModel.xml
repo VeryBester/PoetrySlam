@@ -10,6 +10,7 @@
           <e p="Score.cs" t="Include" />
         </e>
         <e p="Scripts" t="Include">
+          <e p="GameConstants.cs" t="Include" />
           <e p="LevelEditor" t="Include">
             <e p="BeatMap.cs" t="Include" />
             <e p="LevelEditor.cs" t="Include" />

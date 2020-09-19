@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class GameConstants
 {
-    KeyCode botButton1 = KeyCode.D;
-    KeyCode botButton2 = KeyCode.F;
+    public static KeyCode botButton1 = KeyCode.D;
+    public static KeyCode botButton2 = KeyCode.F;
 
-    KeyCode topButton1 = KeyCode.J;
-    KeyCode topButton2 = KeyCode.K;
+    public static KeyCode topButton1 = KeyCode.J;
+    public static KeyCode topButton2 = KeyCode.K;
 }
