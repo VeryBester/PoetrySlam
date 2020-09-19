@@ -22,7 +22,7 @@ public class Score
     {
         totalScore += scoreIncrease;
         combo++;
-        if (scoreIncrease < 0)
+        if (scoreIncrease == 0)
         {
             combo = 0;
             health -= damage;

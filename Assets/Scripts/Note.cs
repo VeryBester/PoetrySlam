@@ -50,7 +50,7 @@ public class Note : MonoBehaviour
             }
             else
             {
-                scoreKeeper.UpdateScore(-10);
+                scoreKeeper.UpdateScore(0);
             }
             Destroy(gameObject);
         }
@@ -67,7 +67,7 @@ public class Note : MonoBehaviour
             }
             else
             {
-                scoreKeeper.UpdateScore(-10);
+                scoreKeeper.UpdateScore(0);
             }
             Destroy(gameObject);
         }
@@ -77,5 +77,11 @@ public class Note : MonoBehaviour
     {
         // Can adjust speed using bpm value
         rb.velocity = bpm * Vector2.left;
+    }
+
+    private void OnBecameInvisible()
+    {
+        scoreKeeper.UpdateScore(0);
+        Destroy(gameObject);
     }
 }
