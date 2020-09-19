@@ -10,10 +10,17 @@
           <e p="Score.cs" t="Include" />
         </e>
         <e p="Scripts" t="Include">
+          <e p="LevelEditor" t="Include">
+            <e p="BeatMap.cs" t="Include" />
+            <e p="LevelEditor.cs" t="Include" />
+          </e>
           <e p="MainMenuCanvas.cs" t="Include" />
-          <e p="Note.cs" t="Include" />
-          <e p="NoteBar.cs" t="Include" />
-          <e p="NoteSpawn.cs" t="Include" />
+          <e p="Notes" t="Include">
+            <e p="Note.cs" t="Include" />
+            <e p="NoteBar.cs" t="Include" />
+            <e p="NoteSpawn.cs" t="Include" />
+          </e>
+          <e p="ScoreAndComboCounter.cs" t="Include" />
         </e>
       </e>
       <e p="Library" t="ExcludeRecursive" />

@@ -1,16 +1,19 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.Serialization;
 using UnityEngine;
 
 public class Note : MonoBehaviour
 {
     private Rigidbody2D rb;
 
-    public bool canHit, isTopRow;
+    public bool canHit, isTopRow, isPastBar;
 
     public float bpm;
 
-    public int scoreRange;
+    public float scoreAccMult;
+
+    public AudioSource audioSource;
 
     public Score scoreKeeper;
 
@@ -46,13 +49,14 @@ public class Note : MonoBehaviour
             // Need to check how close to correct it is for scoring
             if (canHit)
             {
-                scoreKeeper.UpdateScore(100);
+                audioSource.Play();
+                scoreKeeper.UpdateScore((int) (scoreAccMult * 100));
+                Destroy(gameObject);
             }
             else
             {
                 scoreKeeper.UpdateScore(0);
             }
-            Destroy(gameObject);
         }
     }
 
@@ -63,13 +67,14 @@ public class Note : MonoBehaviour
             // Need to check how close to correct it is for scoring
             if (canHit)
             {
-                scoreKeeper.UpdateScore(100);
+                audioSource.Play();
+                scoreKeeper.UpdateScore((int) (scoreAccMult * 100));
+                Destroy(gameObject);
             }
             else
             {
                 scoreKeeper.UpdateScore(0);
             }
-            Destroy(gameObject);
         }
     }
 
@@ -81,7 +86,6 @@ public class Note : MonoBehaviour
 
     private void OnBecameInvisible()
     {
-        scoreKeeper.UpdateScore(0);
         Destroy(gameObject);
     }
 }

@@ -20,6 +20,7 @@ public class Score
     
     public void UpdateScore(int scoreIncrease)
     {
+        MonoBehaviour.print(scoreIncrease);
         totalScore += scoreIncrease;
         combo++;
         if (scoreIncrease == 0)

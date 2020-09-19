@@ -8,7 +8,13 @@ public class NoteSpawn : MonoBehaviour
 
     public GameObject note;
 
+    public ScoreAndComboCounter counter;
+
     private Score scoreKeeper;
+
+    private AudioSource source;
+
+    public AudioClip slap;
 
     private GameObject[] nextNotes;
 
@@ -19,7 +25,10 @@ public class NoteSpawn : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        source = GetComponent<AudioSource>();
+        source.clip = slap;
         scoreKeeper = new Score(maxHp, dmg);
+        counter.scoreKeeper = scoreKeeper;
         canSpawn = true;
         nextNotes = new GameObject[2];
         for (int i = 0; i < 2; i++)
@@ -38,12 +47,14 @@ public class NoteSpawn : MonoBehaviour
 
         if (scoreKeeper.GetHealth() <= 0)
         {
-            print("u suck");
+            // Insert deleting executable here
+            // print("u suck");
         }
     }
 
     IEnumerator Spawn()
     {
+        // Not final way to make beats, need to figure out way to choose the row we want
         for (int i = 0; i < 2; i++)
         {
             GameObject temp = Instantiate(note);
@@ -52,6 +63,7 @@ public class NoteSpawn : MonoBehaviour
             temp.GetComponent<Note>().nextNote = nextNotes[i];
             temp.GetComponent<Note>().bpm = 5;
             temp.GetComponent<Note>().scoreKeeper = scoreKeeper;
+            temp.GetComponent<Note>().audioSource = source;
             if (i == 0)
             {
                 temp.GetComponent<Note>().isTopRow = true;
@@ -64,6 +76,7 @@ public class NoteSpawn : MonoBehaviour
             nextNotes[i] = temp;
         }
         canSpawn = false;
+        // Not final way to make beats, just needed something to test stuff with
         yield return new WaitForSeconds(1f);
         canSpawn = true;
     }
