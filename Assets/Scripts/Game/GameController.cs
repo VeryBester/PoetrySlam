@@ -35,7 +35,8 @@ public class GameController : MonoBehaviour
 
     public float expireTime;
 
-    private bool startGame = false;
+    [HideInInspector]
+    public bool startGame = false;
     public int maxHp, dmg;
 
 
