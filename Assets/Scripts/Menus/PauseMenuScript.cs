@@ -46,12 +46,25 @@ public class PauseMenuScript : MonoBehaviour
     {
         // switch to game scene
         Time.timeScale = 1;
-        StartCoroutine(SwitchToMain());
+        StartCoroutine("SwitchToMain");
+    }
+
+    public void GoBack()
+    {
+        Time.timeScale = 1;
+        StartCoroutine("GoToSongSelect");
     }
 
     IEnumerator SwitchToMain()
     {
         AsyncOperation load = SceneManager.LoadSceneAsync("MainMenu", LoadSceneMode.Single);
+        yield return load;
+        SceneManager.UnloadSceneAsync("SampleScene");
+    }
+    
+    IEnumerator GoToSongSelect()
+    {
+        AsyncOperation load = SceneManager.LoadSceneAsync("SongSelect", LoadSceneMode.Single);
         yield return load;
         SceneManager.UnloadSceneAsync("SampleScene");
     }

@@ -11,4 +11,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/MainMenu.unity
     guid: 9baa0986289fe8c4e9ee990b067ff807
+  - enabled: 1
+    path: Assets/Scenes/RickRoll.unity
+    guid: 3489476ebbb70a24abdf6c5c147dc6b1
+  - enabled: 1
+    path: Assets/Scenes/SongSelect.unity
+    guid: 4dd114fd3acd3b44e8df75d987d6db1c
   m_configObjects: {}

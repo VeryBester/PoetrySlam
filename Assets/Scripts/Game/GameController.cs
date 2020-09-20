@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
+using Button = UnityEngine.UI.Button;
 
 public class GameController : MonoBehaviour
 {
@@ -15,6 +17,8 @@ public class GameController : MonoBehaviour
     private Score scoreKeeper;
     public ScoreAndComboCounter counter;
     public GameObject noteVisual;
+    public Button goBack;
+    public GameObject haiku, scoreBack;
 
     public Transform[] spawns;
 
@@ -70,9 +74,20 @@ public class GameController : MonoBehaviour
     {
         // Gives time for notes to load in
         yield return new WaitForSeconds(Mathf.Max(startTime - spawnDelay, 0f));
-        music.Play();
         startGame = true;
+        music.Play();
         
+    }
+
+    IEnumerator EndGame()
+    {
+        yield return new WaitForSeconds(4f);
+        haiku.SetActive(true);
+        yield return new WaitForSeconds(4f);
+        haiku.SetActive(false);
+        goBack.gameObject.SetActive(true);
+        scoreBack.SetActive(true);
+        Time.timeScale = 0;
     }
 
     private void SpawnNotes()
@@ -102,6 +117,10 @@ public class GameController : MonoBehaviour
                     
                 }
             }
+            else
+            {
+                StartCoroutine("EndGame");
+            }
         }
     }
 
@@ -111,7 +130,6 @@ public class GameController : MonoBehaviour
         note.SetActive(true);
         note.GetComponent<Note>().bpm = 6;
         note.GetComponent<Note>().scoreKeeper = scoreKeeper;
-        note.GetComponent<Note>().audioSource = slap;
         return note;
     }
 
