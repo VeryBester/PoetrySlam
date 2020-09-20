@@ -1,0 +1,139 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class GameController : MonoBehaviour
+{
+    
+    public AudioSource slap;
+    private AudioSource music;
+    private Queue<NoteData> beats;
+    private Queue<NoteData> topActiveBeats;
+    private Queue<NoteData> botActiveBeats;
+    private Queue<GameObject> topNoteVisuals;
+    private Queue<GameObject> botNoteVisuals;
+    private Score scoreKeeper;
+    public ScoreAndComboCounter counter;
+    public GameObject noteVisual;
+
+    public Transform[] spawns;
+
+    public float startTime = 2f;
+    public float spawnDelay = 2f;
+
+    public float perfectTime;
+    public float goodTime;
+    public float lateTime;
+
+    public float expireTime;
+
+    private bool startGame = false;
+    public int maxHp, dmg;
+
+
+    public BeatMap BeatMap;
+    private void Awake() {
+        BeatMap.LoadBeatMap();
+        beats = BeatMap.GetBeats();
+        Debug.Log(beats.Count);
+        
+        music = GetComponent<AudioSource>();
+        music.clip = BeatMap.Song;
+
+        scoreKeeper = new Score(maxHp, dmg);
+        counter.scoreKeeper = scoreKeeper;
+
+        topActiveBeats = new Queue<NoteData>();
+        botActiveBeats = new Queue<NoteData>();
+
+        topNoteVisuals = new Queue<GameObject>();
+        botNoteVisuals = new Queue<GameObject>();
+        StartCoroutine("StartGame");
+    }
+
+    IEnumerator StartGame()
+    {
+        // Gives time for notes to load in
+        yield return new WaitForSeconds(Mathf.Max(startTime - spawnDelay, 0f));
+        music.Play();
+        startGame = true;
+        
+    }
+
+    private void Update() {
+        SpawnNotes();
+    }
+
+    private void SpawnNotes()
+    {
+        if(startGame)
+        {
+            NoteData nextNote = beats.Peek();
+            if(Mathf.Abs(music.time - nextNote.time) < 0.1f)
+            {
+                beats.Dequeue();
+                if(nextNote.topNote)
+                {
+                    GameObject note = GenerateNote();
+                    note.transform.position = spawns[0].position;
+                    topActiveBeats.Enqueue(nextNote);
+                    topNoteVisuals.Enqueue(note);
+                } 
+                if(nextNote.botNote)
+                {
+                    GameObject note = GenerateNote();
+                    note.transform.position = spawns[1].position;
+                    botActiveBeats.Enqueue(nextNote);
+                    botNoteVisuals.Enqueue(note);
+                }
+                
+            }
+        }
+    }
+
+    private GameObject GenerateNote()
+    {
+        GameObject note = Instantiate(noteVisual);
+        note.SetActive(true);
+        note.GetComponent<Note>().bpm = 6;
+        note.GetComponent<Note>().scoreKeeper = scoreKeeper;
+        note.GetComponent<Note>().audioSource = slap;
+        return note;
+    }
+
+    private void ClearExpiredNotes()
+    {
+        float currentTime = music.time;
+        
+    }
+
+    private void KeyPresses()
+    {
+        if(Input.GetKeyDown(GameConstants.topButton1) || Input.GetKeyDown(GameConstants.topButton2))
+        {
+            if(topActiveBeats.Count > 0)
+            {
+                float currentTime = music.time;
+                NoteData note = topActiveBeats.Peek();
+
+                float timeDiff = Mathf.Abs(currentTime - note.time);
+
+                if(timeDiff < perfectTime){
+
+                }
+                else if(timeDiff < goodTime){
+
+                }
+                else if(timeDiff < lateTime){
+                    topActiveBeats.Dequeue();
+                    GameObject noteVisual = topNoteVisuals.Peek();
+                    topNoteVisuals.Dequeue();
+                    Destroy(noteVisual);
+                }
+                else{
+                    scoreKeeper.UpdateScore(0);
+                }
+            }
+        }
+    }
+}
