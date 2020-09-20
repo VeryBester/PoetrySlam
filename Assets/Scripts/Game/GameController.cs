@@ -15,10 +15,11 @@ public class GameController : MonoBehaviour
     private Queue<GameObject> topNoteVisuals;
     private Queue<GameObject> botNoteVisuals;
     private Score scoreKeeper;
+    private bool canJump;
     public ScoreAndComboCounter counter;
     public GameObject noteVisual;
     public Button goBack;
-    public GameObject haiku, scoreBack;
+    public GameObject haiku, scoreBack, egadsChan;
 
     public Transform[] spawns;
 
@@ -44,6 +45,7 @@ public class GameController : MonoBehaviour
     private void Awake() {
         BeatMap.LoadBeatMap();
         beats = BeatMap.GetBeats();
+        canJump = true;
         
         music = GetComponent<AudioSource>();
         music.clip = BeatMap.Song;
@@ -63,7 +65,7 @@ public class GameController : MonoBehaviour
         SpawnNotes();
         ClearExpiredNotes();
         KeyPresses();
-
+        
         if (scoreKeeper.GetHealth() <= 0)
         {
             // TODO: Insert deleting executable here
@@ -212,6 +214,8 @@ public class GameController : MonoBehaviour
                     Destroy(noteVisual);
                     scoreKeeper.UpdateScore(score);
                     slap.Play();
+                    if (canJump)
+                        StartCoroutine("EgadsChanJump");
                 }
             }
         }
@@ -248,8 +252,22 @@ public class GameController : MonoBehaviour
                     Destroy(noteVisual);
                     scoreKeeper.UpdateScore(score);
                     slap.Play();
+                    if (!canJump)
+                        egadsChan.transform.position =
+                            new Vector3(egadsChan.transform.position.x, Mathf.Max(egadsChan.transform.position.y - 3, -3));
                 }
             }
         }
+    }
+
+    IEnumerator EgadsChanJump()
+    {
+        canJump = false;
+        egadsChan.transform.position =
+            new Vector3(egadsChan.transform.position.x, egadsChan.transform.position.y + 3);
+        yield return new WaitForSeconds(0.5f);
+        egadsChan.transform.position =
+            new Vector3(egadsChan.transform.position.x, Mathf.Max(egadsChan.transform.position.y - 3, -3));
+        canJump = true;
     }
 }

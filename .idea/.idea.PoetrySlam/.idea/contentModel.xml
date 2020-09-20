@@ -22,6 +22,7 @@
             <e p="GameController.cs" t="Include" />
           </e>
           <e p="GameConstants.cs" t="Include" />
+          <e p="hotKneeSockGirlAnimationController.cs" t="Include" />
           <e p="JsonHelper.cs" t="Include" />
           <e p="LevelEditor" t="Include">
             <e p="BeatMap.cs" t="Include" />
