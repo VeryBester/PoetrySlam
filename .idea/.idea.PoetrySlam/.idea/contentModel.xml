@@ -17,6 +17,7 @@
         <e p="Scripts" t="Include">
           <e p="BackgroundMove.cs" t="Include" />
           <e p="BackgroundScroll.cs" t="Include" />
+          <e p="egadsChanAnimationController.cs" t="Include" />
           <e p="Game" t="Include">
             <e p="GameController.cs" t="Include" />
           </e>

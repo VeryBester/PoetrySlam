@@ -5,6 +5,8 @@ using UnityEngine.SceneManagement;
 
 public class SongSelectScript : MonoBehaviour
 {
+    public GameObject credits, selectMenu;
+    
     public void Caramelldansen()
     {
         StartCoroutine("ChangeToCaramell");
@@ -27,5 +29,17 @@ public class SongSelectScript : MonoBehaviour
         AsyncOperation load = SceneManager.LoadSceneAsync("RickRoll", LoadSceneMode.Single);
         yield return load;
         SceneManager.UnloadSceneAsync("SongSelect");
+    }
+
+    public void CreditButton()
+    {
+        selectMenu.SetActive(false);
+        credits.SetActive(true);
+    }
+
+    public void GoBack()
+    {
+        selectMenu.SetActive(true);
+        credits.SetActive(false);
     }
 }

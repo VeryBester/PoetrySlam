@@ -5,26 +5,12 @@ using UnityEngine.SceneManagement;
 
 public class MainMenuScript : MonoBehaviour
 {
-    public GameObject MainMenu;
-    public GameObject CreditsMenu;
-    public GameObject MainMenuBackground;
-
-    //public bool toggle_mainMenu;
-
-    // Start is called before the first frame update
-    void Start()
+    private void Update()
     {
-        MainMenuButton();
-        
-        /*
-        if (!toggle_mainMenu) {
-            MainMenu.SetActive(false);
-            CreditsMenu.SetActive(false);
-            MainMenuBackground.SetActive(false);
-        } else {
-            SceneManager.UnloadSceneAsync("SampleScene");
-            MainMenuButton();
-        } */
+        if (Input.anyKey)
+        {
+            StartCoroutine("SwitchToPlay");
+        }
     }
 
     IEnumerator SwitchToPlay()
@@ -38,25 +24,5 @@ public class MainMenuScript : MonoBehaviour
     {
         // switch to game scene
         StartCoroutine("SwitchToPlay");
-    }
-
-    public void CreditsButton()
-    {
-        // Show Credits Menu
-        MainMenu.SetActive(false);
-        CreditsMenu.SetActive(true);
-    }
-
-    public void MainMenuButton()
-    {
-        // Show Main Menu
-        MainMenu.SetActive(true);
-        CreditsMenu.SetActive(false);
-    }
-
-    public void QuitButton()
-    {
-        // Quit Game
-        Application.Quit();
     }
 }
