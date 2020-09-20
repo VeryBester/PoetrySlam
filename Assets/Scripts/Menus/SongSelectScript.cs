@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class SongSelectScript : MonoBehaviour
 {
-    public GameObject credits, selectMenu;
+    public GameObject credits, selectMenu, controls;
     
     public void Caramelldansen()
     {
@@ -41,5 +41,17 @@ public class SongSelectScript : MonoBehaviour
     {
         selectMenu.SetActive(true);
         credits.SetActive(false);
+    }
+
+    public void Controls()
+    {
+        controls.SetActive(true);
+        selectMenu.SetActive(false);
+    }
+
+    public void GoBackFromControls()
+    {
+        controls.SetActive(false);
+        selectMenu.SetActive(true);
     }
 }

@@ -108,9 +108,9 @@ public class GameController : MonoBehaviour
 
     IEnumerator EndGame()
     {
-        yield return new WaitForSeconds(2f);
-        haiku.SetActive(true);
         yield return new WaitForSeconds(4f);
+        haiku.SetActive(true);
+        yield return new WaitForSeconds(8f);
         haiku.SetActive(false);
         goBack.gameObject.SetActive(true);
         scoreBack.SetActive(true);

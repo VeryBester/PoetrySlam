@@ -9,7 +9,7 @@ public class Score
 
     private int health;
 
-    private int maxHp, damage;
+    private int maxHp, damage, highestCombo;
 
     public Score(int maxHp, int damage)
     {
@@ -20,7 +20,6 @@ public class Score
     
     public void UpdateScore(int scoreIncrease)
     {
-        MonoBehaviour.print(scoreIncrease);
         totalScore += scoreIncrease;
         combo++;
         if (scoreIncrease == 0)
@@ -28,6 +27,11 @@ public class Score
             combo = 0;
             health -= damage;
         }
+        else
+        {
+            health += 10;
+        }
+        highestCombo = Mathf.Max(highestCombo, combo);
     }
 
     public int GetHealth()
