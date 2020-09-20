@@ -67,7 +67,7 @@ public class LevelEditor : MonoBehaviour
         
         //TODO commentated out for sanity
 
-        //audioSource.Play();
+        audioSource.Play();
     }
 
     private void PauseMusic() 
