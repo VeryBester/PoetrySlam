@@ -8,6 +8,7 @@ public class PauseMenuScript : MonoBehaviour
 {
     public GameObject PauseMenu;
     public Button pause_button;
+    public AudioSource music;
 
     // Start is called before the first frame update
     void Start()
@@ -29,6 +30,7 @@ public class PauseMenuScript : MonoBehaviour
         pause_button.interactable = false;
         // TODO: somehow pause actual game
         Time.timeScale = 0;
+        music.Pause();
     }
 
     public void ResumeButton()
@@ -37,6 +39,7 @@ public class PauseMenuScript : MonoBehaviour
         pause_button.interactable = true;
         // TODO: reverse of above
         Time.timeScale = 1;
+        music.UnPause();
     }
 
     public void QuitButton()

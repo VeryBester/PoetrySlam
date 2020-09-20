@@ -14,10 +14,6 @@ public class MainMenuScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        if (SceneManager.sceneCount > 1)
-        {
-            SceneManager.UnloadSceneAsync("SampleScene");
-        }
         MainMenuButton();
         
         /*
@@ -33,7 +29,7 @@ public class MainMenuScript : MonoBehaviour
 
     IEnumerator SwitchToPlay()
     {
-        AsyncOperation load = SceneManager.LoadSceneAsync("SampleScene", LoadSceneMode.Single);
+        AsyncOperation load = SceneManager.LoadSceneAsync("SongSelect", LoadSceneMode.Single);
         yield return load;
         SceneManager.UnloadSceneAsync("MainMenu");
     }
@@ -41,7 +37,7 @@ public class MainMenuScript : MonoBehaviour
     public void PlayNowButton()
     {
         // switch to game scene
-        StartCoroutine(SwitchToPlay());
+        StartCoroutine("SwitchToPlay");
     }
 
     public void CreditsButton()

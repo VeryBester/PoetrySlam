@@ -28,7 +28,7 @@ public class Note : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         canHit = false;
-        GetComponent<SpriteRenderer>().sprite = emotes[Random.Range(0, 2)];
+        GetComponent<SpriteRenderer>().sprite = emotes[Random.Range(0, 3)];
     }
 
     // Update is called once per frame
