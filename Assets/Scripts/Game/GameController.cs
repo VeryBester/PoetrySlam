@@ -38,6 +38,8 @@ public class GameController : MonoBehaviour
 
     public float expireTime;
 
+    public hotKneeSockGirlAnimationController kneeSockGirlAnimationController;
+
     [HideInInspector]
     public bool startGame = false;
     public int maxHp, dmg;
@@ -78,6 +80,7 @@ public class GameController : MonoBehaviour
             
             if (scoreKeeper.GetHealth() <= 0)
             {
+                kneeSockGirlAnimationController.triggerHappy();
                 LoseGame();
                 // TODO: Insert deleting executable here
                 // print("u suck");
@@ -170,6 +173,7 @@ public class GameController : MonoBehaviour
                 topNoteVisuals.Dequeue();
                 Destroy(noteVisual);
                 scoreKeeper.UpdateScore(0);
+                kneeSockGirlAnimationController.triggerHappy();
             }
             else{
                 topUpdated = true;
@@ -189,6 +193,7 @@ public class GameController : MonoBehaviour
                 botNoteVisuals.Dequeue();
                 Destroy(noteVisual);
                 scoreKeeper.UpdateScore(0);
+                kneeSockGirlAnimationController.triggerHappy();
             }
             else{
                 botUpdated = true;
@@ -209,6 +214,7 @@ public class GameController : MonoBehaviour
 
                 if(timeDiff > lateTime){
                     scoreKeeper.UpdateScore(0);
+                    kneeSockGirlAnimationController.triggerHappy();
                 }
                 else
                 {
@@ -247,6 +253,7 @@ public class GameController : MonoBehaviour
                 
                 if(timeDiff > lateTime){
                     scoreKeeper.UpdateScore(0);
+                    kneeSockGirlAnimationController.triggerHappy();
                 }
                 else
                 {
