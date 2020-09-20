@@ -17,10 +17,11 @@ public class GameController : MonoBehaviour
     private Queue<GameObject> botNoteVisuals;
     private Score scoreKeeper;
     private bool canJump;
+    private float musicTime;
     public ScoreAndComboCounter counter;
     public GameObject noteVisual;
     public Button goBack;
-    public GameObject haiku, scoreBack, egadsChan;
+    public GameObject haiku, loseScreen, scoreBack, egadsChan;
 
     public Transform[] spawns;
 
@@ -65,13 +66,19 @@ public class GameController : MonoBehaviour
     private void Update() {
         if (SceneManager.GetActiveScene().name.Equals("SampleScene"))
         {
+            musicTime += Time.deltaTime;
             SpawnNotes();
             ClearExpiredNotes();
             KeyPresses();
+
+            if (music.clip.length <= musicTime)
+            {
+                StartCoroutine("EndGame");
+            }
             
             if (scoreKeeper.GetHealth() <= 0)
             {
-                StartCoroutine("EndGame");
+                LoseGame();
                 // TODO: Insert deleting executable here
                 // print("u suck");
             }
@@ -89,13 +96,21 @@ public class GameController : MonoBehaviour
 
     IEnumerator EndGame()
     {
-        yield return new WaitForSeconds(4f);
+        yield return new WaitForSeconds(2f);
         haiku.SetActive(true);
         yield return new WaitForSeconds(4f);
         haiku.SetActive(false);
         goBack.gameObject.SetActive(true);
         scoreBack.SetActive(true);
         Time.timeScale = 0;
+    }
+
+    void LoseGame()
+    {
+        music.Pause();
+        Time.timeScale = 0;
+        loseScreen.SetActive(true);
+        goBack.gameObject.SetActive(true);
     }
 
     private void SpawnNotes()
@@ -124,10 +139,6 @@ public class GameController : MonoBehaviour
                     }
                     
                 }
-            }
-            else
-            {
-                StartCoroutine("EndGame");
             }
         }
     }
