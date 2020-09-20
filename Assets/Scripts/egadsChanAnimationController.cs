@@ -12,14 +12,16 @@ public class egadsChanAnimationController : MonoBehaviour
 
     private void Start() {
         animator = GetComponent<Animator>();
-        if(gameController.startGame)
-        {
-            running = true;
-            animator.SetBool("Running", running);
-        }
+        // if(gameController.startGame)
+        // {
+        //     running = true;
+        //     animator.SetBool("Running", gameController.startGame);
+        // }
     }
 
     private void Update() {
+        animator.SetBool("Running", gameController.startGame);
+
         if(Input.GetKeyDown(GameConstants.botButton1) || Input.GetKeyDown(GameConstants.botButton2) 
                 || Input.GetKeyDown(GameConstants.topButton1) || Input.GetKeyDown(GameConstants.topButton2))
         {

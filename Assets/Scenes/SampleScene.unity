@@ -1110,6 +1110,17 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 757979747}
   m_CullTransparentMesh: 0
+--- !u!114 &804195196 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 567208644185869853, guid: dd4522db873d9ff45a9f3dfdeffd1fea, type: 3}
+  m_PrefabInstance: {fileID: 61692803}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2dabc6b2f1d8233488242882a00127e4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &847725089
 GameObject:
   m_ObjectHideFlags: 0
@@ -2023,6 +2034,7 @@ MonoBehaviour:
   goodScore: 100
   lateScore: 50
   expireTime: 1
+  kneeSockGirlAnimationController: {fileID: 804195196}
   startGame: 0
   maxHp: 200
   dmg: 20
@@ -2055,7 +2067,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: f0f1ed9de861afa4d88d3989cf0c076a, type: 3}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0

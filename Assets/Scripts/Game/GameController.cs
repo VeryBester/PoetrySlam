@@ -42,6 +42,8 @@ public class GameController : MonoBehaviour
 
     [HideInInspector]
     public bool startGame = false;
+
+    private bool startSpawnNotes = false;
     public int maxHp, dmg;
 
 
@@ -63,6 +65,7 @@ public class GameController : MonoBehaviour
         topNoteVisuals = new Queue<GameObject>();
         botNoteVisuals = new Queue<GameObject>();
         StartCoroutine("StartGame");
+        StartCoroutine("StartMusic");
     }
 
     private void Update() {
@@ -92,9 +95,15 @@ public class GameController : MonoBehaviour
     {
         // Gives time for notes to load in
         yield return new WaitForSeconds(Mathf.Max(startTime - spawnDelay, 0f));
-        startGame = true;
+        Debug.Log(Mathf.Max(startTime - spawnDelay, 0f));
+        startSpawnNotes = true;
+    }
+
+    IEnumerator StartMusic()
+    {
+        yield return new WaitForSeconds(spawnDelay);
         music.Play();
-        
+        startGame = true;
     }
 
     IEnumerator EndGame()
@@ -118,7 +127,7 @@ public class GameController : MonoBehaviour
 
     private void SpawnNotes()
     {
-        if(startGame)
+        if(startSpawnNotes)
         {
             if(beats.Count > 0)
             {
