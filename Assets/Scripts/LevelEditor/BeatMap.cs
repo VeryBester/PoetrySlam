@@ -62,13 +62,14 @@ public class BeatMap : ScriptableObject
         }
         
         string json = JsonHelper.ToJson(notes);
-        string filePath = Application.dataPath +"/BeatMaps/Json/" + Name +".json";
+        string filePath = Application.streamingAssetsPath +"/Json/" + Name +".json";
         File.WriteAllText(filePath, json);
     }
 
     public void LoadBeatMap()
     {
-        string filePath = Application.dataPath +"/BeatMaps/Json/" + Name +".json";
+        string filePath = Application.streamingAssetsPath +"/Json/" + Name +".json";
+        //Debug.Log(Application.streamingAssetsPath);
         if(File.Exists(filePath))
         {
             StreamReader reader = new StreamReader(filePath);

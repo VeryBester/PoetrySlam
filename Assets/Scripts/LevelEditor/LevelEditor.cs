@@ -57,6 +57,7 @@ public class LevelEditor : MonoBehaviour
         if(Input.GetKeyDown(KeyCode.Q))
         {
             beatMap.SaveBeatMap();
+            Debug.Log("Saving");
         }
     }
 
