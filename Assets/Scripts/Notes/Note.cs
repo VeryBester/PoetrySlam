@@ -1,7 +1,9 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class Note : MonoBehaviour
 {
@@ -18,12 +20,15 @@ public class Note : MonoBehaviour
     public Score scoreKeeper;
 
     public GameObject nextNote;
+
+    public Sprite[] emotes;
     
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         canHit = false;
+        GetComponent<SpriteRenderer>().sprite = emotes[Random.Range(0, 2)];
     }
 
     // Update is called once per frame

@@ -17,6 +17,9 @@
         <e p="Scripts" t="Include">
           <e p="BackgroundMove.cs" t="Include" />
           <e p="BackgroundScroll.cs" t="Include" />
+          <e p="Game" t="Include">
+            <e p="GameController.cs" t="Include" />
+          </e>
           <e p="GameConstants.cs" t="Include" />
           <e p="JsonHelper.cs" t="Include" />
           <e p="LevelEditor" t="Include">

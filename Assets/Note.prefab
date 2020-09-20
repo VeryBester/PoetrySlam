@@ -200,6 +200,10 @@ MonoBehaviour:
   scoreAccMult: 0
   audioSource: {fileID: 0}
   nextNote: {fileID: 0}
+  emotes:
+  - {fileID: 21300000, guid: 8c128de7e2a0a3b48b2eb72ffb328717, type: 3}
+  - {fileID: 21300000, guid: 2e2ef58073e3ce14a92b6fa5cbfad6ed, type: 3}
+  - {fileID: 21300000, guid: 8c46d682c7027d246b34a745ede3194f, type: 3}
 --- !u!50 &1756151179403545972
 Rigidbody2D:
   serializedVersion: 4
