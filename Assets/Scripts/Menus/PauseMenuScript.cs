@@ -18,7 +18,7 @@ public class PauseMenuScript : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (Input.GetKeyDown(KeyCode.Escape) && SceneManager.GetActiveScene().name.Equals("SampleScene"))
         {
             PauseButton();
         }

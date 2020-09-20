@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
 using Button = UnityEngine.UI.Button;
+using UnityEngine.SceneManagement;
 
 public class GameController : MonoBehaviour
 {
@@ -62,14 +63,18 @@ public class GameController : MonoBehaviour
     }
 
     private void Update() {
-        SpawnNotes();
-        ClearExpiredNotes();
-        KeyPresses();
-        
-        if (scoreKeeper.GetHealth() <= 0)
+        if (SceneManager.GetActiveScene().name.Equals("SampleScene"))
         {
-            // TODO: Insert deleting executable here
-            // print("u suck");
+            SpawnNotes();
+            ClearExpiredNotes();
+            KeyPresses();
+            
+            if (scoreKeeper.GetHealth() <= 0)
+            {
+                StartCoroutine("EndGame");
+                // TODO: Insert deleting executable here
+                // print("u suck");
+            }
         }
     }
 

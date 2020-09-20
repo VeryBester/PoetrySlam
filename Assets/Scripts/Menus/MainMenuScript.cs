@@ -5,6 +5,11 @@ using UnityEngine.SceneManagement;
 
 public class MainMenuScript : MonoBehaviour
 {
+
+    private void Start() {
+        SceneManager.SetActiveScene(SceneManager.GetSceneByName("MainMenu"));
+    }
+
     private void Update()
     {
         if (Input.anyKey)
