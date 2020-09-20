@@ -59,13 +59,13 @@ public class PauseMenuScript : MonoBehaviour
     {
         AsyncOperation load = SceneManager.LoadSceneAsync("MainMenu", LoadSceneMode.Single);
         yield return load;
-        SceneManager.UnloadSceneAsync("SampleScene");
+        SceneManager.UnloadSceneAsync(SceneManager.GetActiveScene().name);
     }
     
     IEnumerator GoToSongSelect()
     {
         AsyncOperation load = SceneManager.LoadSceneAsync("SongSelect", LoadSceneMode.Single);
         yield return load;
-        SceneManager.UnloadSceneAsync("SampleScene");
+        SceneManager.UnloadSceneAsync(SceneManager.GetActiveScene().name);
     }
 }

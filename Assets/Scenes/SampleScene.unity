@@ -2026,9 +2026,9 @@ MonoBehaviour:
   - {fileID: 1744528225}
   - {fileID: 455127060}
   startTime: 2
-  spawnDelay: 2
-  perfectTime: 0.1
-  goodTime: 0.15
+  spawnDelay: 0
+  perfectTime: 0.15
+  goodTime: 0.2
   lateTime: 0.2
   perfectScore: 300
   goodScore: 100
@@ -2036,9 +2036,9 @@ MonoBehaviour:
   expireTime: 1
   kneeSockGirlAnimationController: {fileID: 804195196}
   startGame: 0
-  maxHp: 200
-  dmg: 20
-  BeatMap: {fileID: 11400000, guid: e3eab4c0f27631647a4124b1a53cad46, type: 2}
+  maxHp: 1000
+  dmg: 50
+  BeatMap: {fileID: 11400000, guid: e92c33b39157ed84d8d60e192c03cfe9, type: 2}
 --- !u!1 &1375787293
 GameObject:
   m_ObjectHideFlags: 0

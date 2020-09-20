@@ -28,9 +28,9 @@ public class GameController : MonoBehaviour
     public float startTime = 2f;
     public float spawnDelay = 2f;
 
-    public float perfectTime;
-    public float goodTime;
-    public float lateTime;
+    public float perfectTime = 0.15f;
+    public float goodTime = 0.2f;
+    public float lateTime = 0.2f;
 
     public int perfectScore = 300;
     public int goodScore = 100;
@@ -69,7 +69,7 @@ public class GameController : MonoBehaviour
     }
 
     private void Update() {
-        if (SceneManager.GetActiveScene().name.Equals("SampleScene"))
+        if (SceneManager.GetActiveScene().name.Equals("SampleScene") || SceneManager.GetActiveScene().name.Equals("RickRoll"))
         {
             musicTime += Time.deltaTime;
             SpawnNotes();
@@ -114,13 +114,11 @@ public class GameController : MonoBehaviour
         haiku.SetActive(false);
         goBack.gameObject.SetActive(true);
         scoreBack.SetActive(true);
-        Time.timeScale = 0;
     }
 
     void LoseGame()
     {
         music.Pause();
-        Time.timeScale = 0;
         loseScreen.SetActive(true);
         goBack.gameObject.SetActive(true);
     }
