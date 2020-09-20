@@ -540,8 +540,12 @@ MonoBehaviour:
   - {fileID: 1288134877}
   startTime: 2
   spawnDelay: 2
-  maxHp: 0
-  dmg: 0
+  perfectTime: 0.1
+  goodTime: 0.15
+  lateTime: 0.2
+  expireTime: 1
+  maxHp: 200
+  dmg: 10
   BeatMap: {fileID: 11400000, guid: e3eab4c0f27631647a4124b1a53cad46, type: 2}
 --- !u!1 &634497965
 GameObject:
@@ -1248,7 +1252,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1375701703
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1562,7 +1566,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: f0f1ed9de861afa4d88d3989cf0c076a, type: 3}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0

@@ -25,6 +25,10 @@ public class GameController : MonoBehaviour
     public float goodTime;
     public float lateTime;
 
+    public int perfectScore = 300;
+    public int goodScore = 100;
+    public int lateScore = 50;
+
     public float expireTime;
 
     private bool startGame = false;
@@ -35,7 +39,6 @@ public class GameController : MonoBehaviour
     private void Awake() {
         BeatMap.LoadBeatMap();
         beats = BeatMap.GetBeats();
-        Debug.Log(beats.Count);
         
         music = GetComponent<AudioSource>();
         music.clip = BeatMap.Song;
@@ -51,6 +54,18 @@ public class GameController : MonoBehaviour
         StartCoroutine("StartGame");
     }
 
+    private void Update() {
+        SpawnNotes();
+        ClearExpiredNotes();
+        KeyPresses();
+
+        if (scoreKeeper.GetHealth() <= 0)
+        {
+            // TODO: Insert deleting executable here
+            // print("u suck");
+        }
+    }
+
     IEnumerator StartGame()
     {
         // Gives time for notes to load in
@@ -60,33 +75,32 @@ public class GameController : MonoBehaviour
         
     }
 
-    private void Update() {
-        SpawnNotes();
-    }
-
     private void SpawnNotes()
     {
         if(startGame)
         {
-            NoteData nextNote = beats.Peek();
-            if(Mathf.Abs(music.time - nextNote.time) < 0.1f)
+            if(beats.Count > 0)
             {
-                beats.Dequeue();
-                if(nextNote.topNote)
+                NoteData nextNote = beats.Peek();
+                if(Mathf.Abs(music.time - nextNote.time) < 0.1f)
                 {
-                    GameObject note = GenerateNote();
-                    note.transform.position = spawns[0].position;
-                    topActiveBeats.Enqueue(nextNote);
-                    topNoteVisuals.Enqueue(note);
-                } 
-                if(nextNote.botNote)
-                {
-                    GameObject note = GenerateNote();
-                    note.transform.position = spawns[1].position;
-                    botActiveBeats.Enqueue(nextNote);
-                    botNoteVisuals.Enqueue(note);
+                    beats.Dequeue();
+                    if(nextNote.topNote)
+                    {
+                        GameObject note = GenerateNote();
+                        note.transform.position = spawns[0].position;
+                        topActiveBeats.Enqueue(nextNote);
+                        topNoteVisuals.Enqueue(note);
+                    } 
+                    if(nextNote.botNote)
+                    {
+                        GameObject note = GenerateNote();
+                        note.transform.position = spawns[1].position;
+                        botActiveBeats.Enqueue(nextNote);
+                        botNoteVisuals.Enqueue(note);
+                    }
+                    
                 }
-                
             }
         }
     }
@@ -101,10 +115,48 @@ public class GameController : MonoBehaviour
         return note;
     }
 
+    // Deletes unreachable late notes
     private void ClearExpiredNotes()
     {
-        float currentTime = music.time;
+        float currentTime = music.time - startTime;
         
+        bool topUpdated = false;
+        while(!topUpdated && topActiveBeats.Count > 0)
+        {
+            NoteData note = topActiveBeats.Peek();
+            float timeDiff = currentTime - note.time;
+            if(timeDiff > lateTime)
+            {
+                Debug.Log(timeDiff);
+                topActiveBeats.Dequeue();
+                GameObject noteVisual = topNoteVisuals.Peek();
+                topNoteVisuals.Dequeue();
+                Destroy(noteVisual);
+                scoreKeeper.UpdateScore(0);
+            }
+            else{
+                topUpdated = true;
+            }
+        }
+
+
+        bool botUpdated = false;
+        while(!botUpdated && botActiveBeats.Count > 0)
+        {
+            NoteData note = botActiveBeats.Peek();
+            float timeDiff = currentTime - note.time;
+            if(timeDiff > lateTime)
+            {
+                botActiveBeats.Dequeue();
+                GameObject noteVisual = botNoteVisuals.Peek();
+                botNoteVisuals.Dequeue();
+                Destroy(noteVisual);
+                scoreKeeper.UpdateScore(0);
+            }
+            else{
+                botUpdated = true;
+            }
+        }
     }
 
     private void KeyPresses()
@@ -113,22 +165,67 @@ public class GameController : MonoBehaviour
         {
             if(topActiveBeats.Count > 0)
             {
-                float currentTime = music.time;
+                float currentTime = music.time - startTime;
+                
                 NoteData note = topActiveBeats.Peek();
-
                 float timeDiff = Mathf.Abs(currentTime - note.time);
 
                 if(timeDiff < perfectTime){
-
+                    topActiveBeats.Dequeue();
+                    GameObject noteVisual = topNoteVisuals.Peek();
+                    topNoteVisuals.Dequeue();
+                    Destroy(noteVisual);
+                    scoreKeeper.UpdateScore(perfectScore);
                 }
                 else if(timeDiff < goodTime){
-
+                    topActiveBeats.Dequeue();
+                    GameObject noteVisual = topNoteVisuals.Peek();
+                    topNoteVisuals.Dequeue();
+                    Destroy(noteVisual);
+                    scoreKeeper.UpdateScore(goodScore);
                 }
                 else if(timeDiff < lateTime){
                     topActiveBeats.Dequeue();
                     GameObject noteVisual = topNoteVisuals.Peek();
                     topNoteVisuals.Dequeue();
                     Destroy(noteVisual);
+                    scoreKeeper.UpdateScore(lateScore);
+                }
+                else{
+                    scoreKeeper.UpdateScore(0);
+                }
+            }
+        }
+
+        if(Input.GetKeyDown(GameConstants.botButton1) || Input.GetKeyDown(GameConstants.botButton2))
+        {
+            if(botActiveBeats.Count > 0)
+            {
+                float currentTime = music.time - startTime;
+                
+                NoteData note = botActiveBeats.Peek();
+                float timeDiff = Mathf.Abs(currentTime - note.time);
+                
+                if(timeDiff < perfectTime){
+                    botActiveBeats.Dequeue();
+                    GameObject noteVisual = botNoteVisuals.Peek();
+                    botNoteVisuals.Dequeue();
+                    Destroy(noteVisual);
+                    scoreKeeper.UpdateScore(perfectScore);
+                }
+                else if(timeDiff < goodTime){
+                    botActiveBeats.Dequeue();
+                    GameObject noteVisual = botNoteVisuals.Peek();
+                    botNoteVisuals.Dequeue();
+                    Destroy(noteVisual);
+                    scoreKeeper.UpdateScore(goodScore);
+                }
+                else if(timeDiff < lateTime){
+                    botActiveBeats.Dequeue();
+                    GameObject noteVisual = botNoteVisuals.Peek();
+                    botNoteVisuals.Dequeue();
+                    Destroy(noteVisual);
+                    scoreKeeper.UpdateScore(lateScore);
                 }
                 else{
                     scoreKeeper.UpdateScore(0);
