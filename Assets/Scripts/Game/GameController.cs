@@ -170,29 +170,29 @@ public class GameController : MonoBehaviour
                 NoteData note = topActiveBeats.Peek();
                 float timeDiff = Mathf.Abs(currentTime - note.time);
 
-                if(timeDiff < perfectTime){
-                    topActiveBeats.Dequeue();
-                    GameObject noteVisual = topNoteVisuals.Peek();
-                    topNoteVisuals.Dequeue();
-                    Destroy(noteVisual);
-                    scoreKeeper.UpdateScore(perfectScore);
-                }
-                else if(timeDiff < goodTime){
-                    topActiveBeats.Dequeue();
-                    GameObject noteVisual = topNoteVisuals.Peek();
-                    topNoteVisuals.Dequeue();
-                    Destroy(noteVisual);
-                    scoreKeeper.UpdateScore(goodScore);
-                }
-                else if(timeDiff < lateTime){
-                    topActiveBeats.Dequeue();
-                    GameObject noteVisual = topNoteVisuals.Peek();
-                    topNoteVisuals.Dequeue();
-                    Destroy(noteVisual);
-                    scoreKeeper.UpdateScore(lateScore);
-                }
-                else{
+                if(timeDiff > lateTime){
                     scoreKeeper.UpdateScore(0);
+                }
+                else
+                {
+                    int score = 0;
+                    if(timeDiff < perfectTime){
+                        score = perfectScore;
+                    } 
+                    else if(timeDiff < goodTime)
+                    {
+                        score = goodScore;
+                    }
+                    else{
+                        score = lateScore;
+                    }
+                    
+                    topActiveBeats.Dequeue();
+                    GameObject noteVisual = topNoteVisuals.Peek();
+                    topNoteVisuals.Dequeue();
+                    Destroy(noteVisual);
+                    scoreKeeper.UpdateScore(score);
+                    slap.Play();
                 }
             }
         }
@@ -206,29 +206,29 @@ public class GameController : MonoBehaviour
                 NoteData note = botActiveBeats.Peek();
                 float timeDiff = Mathf.Abs(currentTime - note.time);
                 
-                if(timeDiff < perfectTime){
-                    botActiveBeats.Dequeue();
-                    GameObject noteVisual = botNoteVisuals.Peek();
-                    botNoteVisuals.Dequeue();
-                    Destroy(noteVisual);
-                    scoreKeeper.UpdateScore(perfectScore);
-                }
-                else if(timeDiff < goodTime){
-                    botActiveBeats.Dequeue();
-                    GameObject noteVisual = botNoteVisuals.Peek();
-                    botNoteVisuals.Dequeue();
-                    Destroy(noteVisual);
-                    scoreKeeper.UpdateScore(goodScore);
-                }
-                else if(timeDiff < lateTime){
-                    botActiveBeats.Dequeue();
-                    GameObject noteVisual = botNoteVisuals.Peek();
-                    botNoteVisuals.Dequeue();
-                    Destroy(noteVisual);
-                    scoreKeeper.UpdateScore(lateScore);
-                }
-                else{
+                if(timeDiff > lateTime){
                     scoreKeeper.UpdateScore(0);
+                }
+                else
+                {
+                    int score = 0;
+                    if(timeDiff < perfectTime){
+                        score = perfectScore;
+                    } 
+                    else if(timeDiff < goodTime)
+                    {
+                        score = goodScore;
+                    }
+                    else{
+                        score = lateScore;
+                    }
+                    
+                    botActiveBeats.Dequeue();
+                    GameObject noteVisual = botNoteVisuals.Peek();
+                    botNoteVisuals.Dequeue();
+                    Destroy(noteVisual);
+                    scoreKeeper.UpdateScore(score);
+                    slap.Play();
                 }
             }
         }
